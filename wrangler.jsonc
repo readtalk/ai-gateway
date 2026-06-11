@@ -1,0 +1,34 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ai-gateway",
+	"compatibility_date": "2025-10-08",
+	"main": "./workers/app.ts",
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true
+	},
+	"ai": {
+		"binding": "AI"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "AEO_KV",
+			"id": "54f89be27a414fabaf381a919403582e"
+		}
+	],
+	"queues": {
+		"producers": [
+			{
+				"queue": "ai-gateway",
+				"binding": "BRAND_VISIBILITY_QUEUE"
+			}
+		],
+		"consumers": [
+			{
+				"queue": "ai-gateway",
+				"max_batch_size": 5,
+				"max_concurrency": 10
+			}
+		]
+	}
+}
